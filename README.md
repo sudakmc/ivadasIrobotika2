@@ -4,7 +4,6 @@ Arduino Uno projektas iš **matavimo ir atvaizdavimo** srities. Vartotojas mygtu
 
 Projektas sukurtas kaip robotikos kurso 2-asis namų darbas (teminė užduotis) ir veikia su tikra aparatūra.
 
-![Sujungimų schema](docs/schema.png)
 
 ## Pristatymas
 
@@ -116,22 +115,6 @@ LCD papildomai:
 - **Timer1** naudojamas sistemos laikrodžiui, todėl `analogWrite()` D9 ir D10 kontaktuose neveiktų. D9 ir D10 čia naudojami tik kaip skaitmeniniai išėjimai, todėl konflikto nėra.
 - **Timer0** paliktas `millis()` / `micros()`, **Timer2** – `tone()` funkcijai.
 
-### Saugumas
-
-- Mygtukai jungiami tarp kontakto ir GND, naudojami vidiniai pull-up rezistoriai (`INPUT_PULLUP`). Kontaktas niekada nėra jungiamas tiesiai prie 5V.
-- LCD apšvietimas ribojamas 220 Ω rezistoriumi.
-- Matricos šviesumas ribojamas lygiais `{1, 4, 8, 12, 15}` iš 15, numatytasis – 4. Taip srovė iš USB lieka gerokai mažesnė nei 500 mA.
-
-## Paleidimas
-
-1. Įdiekite **Arduino IDE 2.x**. Ubuntu sistemoje leiskite naudoti serijinį prievadą:
-   ```bash
-   sudo usermod -aG dialout $USER   # tada atsijunkite ir vėl prisijunkite
-   ```
-2. **Library Manager** lange įdiekite **LedControl** (Eberhard Fahle). `LiquidCrystal` ir `EEPROM` jau yra IDE.
-3. Sujunkite grandinę pagal lentelę ir įkelkite [`tools/HardwareTest`](tools/HardwareTest/HardwareTest.ino) – jis patikrina LCD, matricą, mygtukus ir garsiakalbį.
-4. Atidarykite [`src/HeartbeatDisplay/HeartbeatDisplay.ino`](src/HeartbeatDisplay/HeartbeatDisplay.ino), pasirinkite **Arduino Uno** ir teisingą prievadą, spauskite **Upload**.
-5. Atidarykite **Serial Monitor** (115200 baud), kad matytumėte įvykių žurnalą.
 
 Su `arduino-cli`:
 ```bash
@@ -259,21 +242,6 @@ Pakeitus EEPROM išdėstymą, būtina padidinti `EE_VERSION` – tada seni duome
 
 Kadrų skaičius apskaičiuojamas automatiškai. Greitis `0` reiškia, kad animacija plaka pagal išmatuotą BPM.
 
-## Repozitorijos struktūra
-
-```
-2ND/
-├── src/
-│   └── HeartbeatDisplay/
-│       └── HeartbeatDisplay.ino   # Pagrindinė programa
-├── tools/
-│   └── HardwareTest/
-│       └── HardwareTest.ino       # Sujungimų testas
-├── docs/
-│   └── schema.png                 # Sujungimų schema
-├── ATASKAITA.md                   # Trumpa ataskaita (≤ 1 psl.)
-└── README.md
-```
 
 ## Licencija
 
